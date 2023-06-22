@@ -5,9 +5,6 @@ const winner = document.querySelector(".winner");
 const choose = document.querySelector(".choose");
 
 let board = ['', '', '', '', '', '', '', '', ''];
-let xSign = `<div class="xSign"></div>`;
-let oSign = `<div class="oSign"></div>`;
-let currentPlayer = xSign;
 let currentPlayerXO = "X";
 let gameEnded = false;
 let buttonClicked = false;
@@ -31,7 +28,7 @@ cells.forEach(cell => cell.addEventListener("click", (event) => {
         const signDiv = document.createElement("div");
         signDiv.classList.add(currentPlayerXO === "X" ? "xSign" : "oSign");
         event.target.appendChild(signDiv);
-        board[cellIndex] = currentPlayer;
+        board[cellIndex] = currentPlayerXO;
         
         if (checkWinner()) {
             turn.textContent = "Game ended";
@@ -44,7 +41,6 @@ cells.forEach(cell => cell.addEventListener("click", (event) => {
             gameEnded = true;
             resetGame();
         } else {
-            currentPlayer = currentPlayer === xSign ? oSign : xSign;
             currentPlayerXO = currentPlayerXO === "X" ? "O" : "X";
             turn.textContent = `${currentPlayerXO}'s turn`;
         }
@@ -82,7 +78,6 @@ function resetGame() {
 
         gameEnded = false;
         board = ['', '', '', '', '', '', '', '', ''];
-        currentPlayer = xSign;
         currentPlayerXO = "X";
         choose.textContent = currentPlayerXO;
         turn.textContent = "X's turn";
@@ -102,7 +97,6 @@ function selectPlayer() {
 }
 
 choose.addEventListener("click", () => {
-    currentPlayer = currentPlayer === xSign ? oSign : xSign;
     currentPlayerXO = currentPlayerXO === "X" ? "O" : "X";
     choose.textContent = currentPlayerXO;
     turn.textContent = `${currentPlayerXO}'s turn`
