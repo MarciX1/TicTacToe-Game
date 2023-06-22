@@ -27,9 +27,11 @@ cells.forEach(cell => cell.addEventListener("click", (event) => {
         return;
     }
 
-    if (board[cellIndex] === "") {       
-        event.target.innerHTML = currentPlayer;
-        board[cellIndex] = currentPlayer;   
+    if (board[cellIndex] === "") {    
+        const signDiv = document.createElement("div");
+        signDiv.classList.add(currentPlayerXO === "X" ? "xSign" : "oSign");
+        event.target.appendChild(signDiv);
+        board[cellIndex] = currentPlayer;
         
         if (checkWinner()) {
             turn.textContent = "Game ended";
@@ -92,9 +94,9 @@ function resetGame() {
 
 // Choose between X or O
 function selectPlayer() {
-    if (buttonClicked = false) {
+    if (buttonClicked === false) {
         choose.disabled = false;
-    } else if (buttonClicked = true) {
+    } else if (buttonClicked === true) {
         choose.disabled = true;
     }
 }
