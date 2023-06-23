@@ -126,8 +126,8 @@ h1 {
 
 .oSign {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     background: transparent;
     border: 10px solid var(--blue);

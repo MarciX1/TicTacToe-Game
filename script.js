@@ -25,24 +25,27 @@ cells.forEach(cell => cell.addEventListener("click", (event) => {
     }
 
     if (board[cellIndex] === "") {    
-        const signDiv = document.createElement("div");
-        signDiv.classList.add(currentPlayerXO === "X" ? "xSign" : "oSign");
-        event.target.appendChild(signDiv);
-        board[cellIndex] = currentPlayerXO;
-        
-        if (checkWinner()) {
-            turn.textContent = "Game ended";
-            winner.textContent = `Winner: ${currentPlayerXO}`;
-            gameEnded = true;
-            resetGame();
-        } else if (board.every(cell => cell !== "")) {
-            turn.textContent = "Game ended";
-            winner.textContent = "It's a tie!";
-            gameEnded = true;
-            resetGame();
-        } else {
-            currentPlayerXO = currentPlayerXO === "X" ? "O" : "X";
-            turn.textContent = `${currentPlayerXO}'s turn`;
+
+        if (!event.currentTarget.querySelector("div")) { // Check if cell doesn't have a div
+            const signDiv = document.createElement("div");
+            signDiv.classList.add(currentPlayerXO === "X" ? "xSign" : "oSign");
+            event.currentTarget.appendChild(signDiv);
+            board[cellIndex] = currentPlayerXO;
+
+            if (checkWinner()) {
+                turn.textContent = "Game ended";
+                winner.textContent = `Winner: ${currentPlayerXO}`;
+                gameEnded = true;
+                resetGame();
+            } else if (board.every(cell => cell !== "")) {
+                turn.textContent = "Game ended";
+                winner.textContent = "It's a tie!";
+                gameEnded = true;
+                resetGame();
+            } else {
+                currentPlayerXO = currentPlayerXO === "X" ? "O" : "X";
+                turn.textContent = `${currentPlayerXO}'s turn`;
+            }
         }
 
     }
